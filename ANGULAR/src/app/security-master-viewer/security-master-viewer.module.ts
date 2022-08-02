@@ -5,6 +5,7 @@ import { TileComponentComponent } from './master-component/tile-component/tile-c
 import { TableComponentComponent } from './master-component/table-component/table-component.component';
 import { EditFormComponentComponent } from './master-component/tile-component/edit-form-component/edit-form-component.component';
 import {MatCardModule} from '@angular/material/card';
+import {MatGridListModule} from '@angular/material/grid-list';
 
 
 @NgModule({
@@ -13,10 +14,12 @@ import {MatCardModule} from '@angular/material/card';
     TileComponentComponent,
     TableComponentComponent,
     EditFormComponentComponent,
-  ],
+    ],
   imports: [
     CommonModule,
-    MatCardModule
-  ]
+    MatCardModule,
+    MatGridListModule
+  ],
+  exports:[MasterComponentComponent, TileComponentComponent]
 })
 export class SecurityMasterViewerModule { }
