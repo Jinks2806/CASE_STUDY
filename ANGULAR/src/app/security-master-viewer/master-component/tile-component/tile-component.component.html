@@ -1,4 +1,4 @@
-<!-- <mat-grid-list cols="2">
+<!-- <mat-grid-list cols="2" rowHeight="3:1">
     <mat-grid-tile>
         <mat-card>
             <div>
@@ -17,21 +17,26 @@
     </mat-grid-tile>
 </mat-grid-list>
 
-
  -->
- <mat-card-content class="md-padding" layout="row" layout-wrap>
-    <div flex="33" ng-repeat="i in [1,2,3,4,5,6,7]">
+
+  <div class="content">
+    <div fxLayout="row wrap" fxLayoutGap="10px grid">
+      <div fxFlex.lg="50%" fxFlex.xs="50%" fxFlex.sm="50%">
         <mat-card>
             <div>
                 <h3>No of Securities</h3><br/>
                 <p>Inactive Securities</p>
             </div>
         </mat-card>
+      </div>
+      <div fxFlex.lg="50%" fxFlex.xs="50%" fxFlex.sm="50%">
         <mat-card>
             <div>
                 <h3>No of Securities</h3><br/>
-                <p>Inactive Securities</p>
+                <p>Active Securities</p>
             </div>
         </mat-card>
+      </div>
     </div>
-</mat-card-content>
+  </div>
+  <div><app-table-component></app-table-component></div>

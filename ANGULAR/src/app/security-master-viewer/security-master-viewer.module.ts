@@ -7,7 +7,8 @@ import { EditFormComponentComponent } from './master-component/tile-component/ed
 import {MatCardModule} from '@angular/material/card';
 import {MatGridListModule} from '@angular/material/grid-list';
 import { FlexLayoutModule } from '@angular/flex-layout';
-
+import {MatToolbarModule} from '@angular/material/toolbar';
+import {MatTableModule} from '@angular/material/table';
 
 
 @NgModule({
@@ -21,7 +22,9 @@ import { FlexLayoutModule } from '@angular/flex-layout';
     CommonModule,
     MatCardModule,
     MatGridListModule,
-    FlexLayoutModule
+    FlexLayoutModule,
+    MatToolbarModule,
+    MatTableModule
   ],
   exports:[MasterComponentComponent, TileComponentComponent]
 })

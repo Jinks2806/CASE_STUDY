@@ -1,1 +1,40 @@
-<p>table-component works!</p>
+<table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+
+  <!--- Note that these columns can be defined in any order.
+        The actual rendered columns are set as a property on the row definition" -->
+
+  <!-- Position Column -->
+  <ng-container matColumnDef="NAME">
+    <th mat-header-cell *matHeaderCellDef> NAME </th>
+    <td mat-cell *matCellDef="let element"> {{element.NAME}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="DESCRIPTION">
+    <th mat-header-cell *matHeaderCellDef> DESCRIPTION </th>
+    <td mat-cell *matCellDef="let element"> {{element.DESCRIPTION}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="PRICE">
+      <th mat-header-cell *matHeaderCellDef> PRICE </th>
+      <td mat-cell *matCellDef="let element" [ngClass]="{'negative':element.PRICE<0, 'positive':element.PRICE>=0}"> ${{element.PRICE}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="DATE">
+    <th mat-header-cell *matHeaderCellDef> DATE </th>
+    <td mat-cell *matCellDef="let element"> {{element.DATE}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="EDIT">
+    <th mat-header-cell *matHeaderCellDef> EDIT </th>
+    <td mat-cell *matCellDef="let element"> {{element.EDIT}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="DELETE">
+    <th mat-header-cell *matHeaderCellDef> DELETE </th>
+    <td mat-cell *matCellDef="let element"> {{element.DELETE}} </td>
+  </ng-container>
+
+  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+  <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+</table>
+
