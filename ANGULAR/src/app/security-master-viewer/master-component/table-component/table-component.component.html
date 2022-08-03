@@ -4,6 +4,11 @@
         The actual rendered columns are set as a property on the row definition" -->
 
   <!-- Position Column -->
+  <ng-container matColumnDef="SECID">
+    <th mat-header-cell *matHeaderCellDef> SECID </th>
+    <td mat-cell *matCellDef="let element"> {{element.SECID}} </td>
+  </ng-container>
+
   <ng-container matColumnDef="NAME">
     <th mat-header-cell *matHeaderCellDef> NAME </th>
     <td mat-cell *matCellDef="let element"> {{element.NAME}} </td>
@@ -26,12 +31,12 @@
 
   <ng-container matColumnDef="EDIT">
     <th mat-header-cell *matHeaderCellDef> EDIT </th>
-    <td mat-cell *matCellDef="let element"> {{element.EDIT}} </td>
+    <td mat-cell *matCellDef="let element"> <a href={{element.EDIT}}>EDIT</a></td>
   </ng-container>
 
   <ng-container matColumnDef="DELETE">
     <th mat-header-cell *matHeaderCellDef> DELETE </th>
-    <td mat-cell *matCellDef="let element"> {{element.DELETE}} </td>
+    <td mat-cell *matCellDef="let element"><a href={{element.DELETE}}>DELETE</a></td>
   </ng-container>
 
   <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
