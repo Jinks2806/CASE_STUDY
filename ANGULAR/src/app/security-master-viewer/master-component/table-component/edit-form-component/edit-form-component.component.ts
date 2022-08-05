@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
+import { SharedService } from 'src/app/shared/Services/shared.service';
 
 
 @Component({
@@ -10,16 +11,20 @@ import { FormControl, FormGroup } from '@angular/forms';
 export class EditFormComponentComponent implements OnInit {
   @Input() showBonds!: boolean;
   @Input() showEquity! : boolean;
+  @Input() SECID!: number;
   editEquityFormGroup!: FormGroup;
   editBondsFormGroup!: FormGroup;
-  constructor() { }
+  constructor(private service: SharedService) { }
+
+  EquityList: any  = [];
 
   ngOnInit(): void {
     this.initForm();
+    this.refreshEquityList();
   }
   private initForm(){
     this.editEquityFormGroup = new FormGroup({
-      securityName : new FormControl(),
+      securityName : new FormControl({value:this.EquityList.securityName}),
       description : new FormControl(),
       pricingCurrency : new FormControl(),
       totalSharesOutstanding : new FormControl(),
@@ -30,7 +35,7 @@ export class EditFormComponentComponent implements OnInit {
     })
 
     this.editBondsFormGroup = new FormGroup({
-      securityName : new FormControl(),
+      securityName : new FormControl({value:this.EquityList.at(0).securityName}),
       description : new FormControl(),
       coupon : new FormControl(),
       callableFlag : new FormControl(),
@@ -42,6 +47,11 @@ export class EditFormComponentComponent implements OnInit {
     })
   }
 
+  refreshEquityList(){
+    this.service.getEquities().subscribe(data=>{
+      this.EquityList = data;
+    });
+  }
   // onSubmit(): void {
   //   if (this.form.invalid) {
   //     return;
