@@ -1,5 +1,52 @@
-<mat-toolbar class="primary">
-  <span>My Application</span>
-</mat-toolbar>
-<app-tile-component></app-tile-component>
+<!-- <div class="container">
+  <mat-toolbar>
+    <span style="font-size: 1.2em; font-weight: 700">{{title}}</span>
+    <span class="tabs"></span>
+    <mat-button-toggle-group>
+      <mat-button-toggle checked="true" (click)="toggleShowEquity()" type="checkbox" >EQUITY</mat-button-toggle>
+      <mat-button-toggle (click)="toggleShowBonds()" type="checkbox">BONDS</mat-button-toggle>
+    </mat-button-toggle-group>
+    <button mat-button><mat-icon>cloud_upload</mat-icon>UPLOADER</button>
+  </mat-toolbar>
+ <app-tile-component [showEquity]="isShownEquity" [showBonds]="isShownBonds"></app-tile-component>
+</div> -->
+ 
+<div class="container">
+<mat-toolbar class="position">
+  <span style="font-size: 1.2em; font-weight: 700">{{title}}</span>
+  <span class="tabs"></span>
+  <div fxShow="true" fxHide.lt-md="true">
+    <mat-button-toggle-group>
+      <mat-button-toggle checked="true" (click)="toggleShowEquity()" type="checkbox">EQUITY</mat-button-toggle>
+      <mat-button-toggle (click)="toggleShowBonds()" type="checkbox">BONDS</mat-button-toggle>
+    </mat-button-toggle-group>
+    <button mat-button><mat-icon>cloud_upload</mat-icon>UPLOADER</button>
+  </div>
 
+  <div fxShow="true" fxHide.gt-sm="true">
+    <a (click)="sidenav.toggle()"><mat-icon>menu</mat-icon></a>
+  </div>
+</mat-toolbar>
+
+<mat-sidenav-container>
+  <mat-sidenav #sidenav fxLayout="column">
+    <div fxLayout="column">
+      <a (click)="sidenav.toggle()" href="#" mat-button>Close</a>
+      <a mat-button>
+        <mat-button-toggle-group>
+          <mat-button-toggle checked="true" (click)="toggleShowEquity()" type="checkbox" >EQUITY</mat-button-toggle>
+          <mat-button-toggle (click)="toggleShowBonds()" type="checkbox">BONDS</mat-button-toggle>
+        </mat-button-toggle-group>
+      </a>
+      <a href="#" mat-button>
+        <button mat-button><mat-icon>cloud_upload</mat-icon>UPLOADER</button>
+      </a>
+    </div>
+  </mat-sidenav>
+  <mat-sidenav-content>
+    <router-outlet></router-outlet>
+    <app-tile-component [showEquity]="isShownEquity" [showBonds]="isShownBonds"></app-tile-component>
+  </mat-sidenav-content>
+</mat-sidenav-container>
+</div>
+<router-outlet></router-outlet>

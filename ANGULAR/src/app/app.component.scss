@@ -1,0 +1,56 @@
+.container{
+  background-color: white;
+}
+
+//TOOLBAR 
+.tabs{
+    flex: 1 1 auto;
+}
+
+mat-toolbar{
+    margin-bottom: 40px;
+    border-color: black;
+    position: sticky;
+    position: -webkit-sticky; /* For macOS/iOS Safari */
+    top: 0; /* Sets the sticky toolbar to be on top */
+    z-index: 1000;
+    background-color: black;
+    color: white;
+}
+
+//BUTTON 
+.mat-button-toggle-checked {
+    background-color: black;
+    color: white;
+  }
+
+.mat-button{
+    font-size: 1.1em; 
+    font-weight: 700;
+    margin: 10px;
+}
+
+.mat-sidenav-container {
+    background: rgba(0, 0, 0, 0.08);
+    background-color: white;
+  }
+  
+  //SIDE NAV 
+  .blank-grow {
+    flex: 1 1 auto;
+  }
+
+  .mat-sidenav{
+    background-color: black;
+    color: white;
+  }
+
+  .mat-sidenav-content{
+    overflow-x: hidden;
+}
+
+mat-icon {
+    margin-right: 10px;
+}
+
+  

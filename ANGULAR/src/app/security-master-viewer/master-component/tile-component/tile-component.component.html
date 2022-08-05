@@ -1,43 +1,48 @@
-<!-- <mat-grid-list cols="2" rowHeight="3:1">
-    <mat-grid-tile>
-        <mat-card>
-            <div>
-                <h3>No of Securities</h3><br/>
-                <p>Active Securities</p>
-            </div>
-        </mat-card>
-    </mat-grid-tile>
-    <mat-grid-tile>
-        <mat-card>
-            <div>
-                <h3>No of Securities</h3><br/>
-                <p>Inactive Securities</p>
-            </div>
-        </mat-card>
-    </mat-grid-tile>
-</mat-grid-list>
-
- -->
-
-  <div class="content">
+  <div *ngIf='showEquity' class="row container-fluid"  id="divshow" class="equity">
     <div fxLayout="row wrap" fxLayoutGap="10px grid">
-      <div fxFlex.lg="50%" fxFlex.xs="50%" fxFlex.sm="50%">
+      <div fxFlex="50%">
         <mat-card>
             <div>
                 <h3 class="active">1000</h3>
             </div>
-            <p>Active Securities</p>
+            <p>EQUITY ACTIVE SECURITIES</p>
+        </mat-card>
+      </div>
+      <div fxFlex="50%">
+        <mat-card>
+            <div>
+                <h3 class="inactive">9</h3>
+            </div>
+            <p>EQUITY INACTIVE SECURITIES</p>
+        </mat-card>
+      </div>
+    </div>
+    <br/>
+    <h1 style="text-align: center; font-weight: bold;">EQUITY DETAILS</h1>
+    <div><app-table-component [showEquity]="showEquity"></app-table-component></div>
+  </div>
+
+
+  <div *ngIf='showBonds' class="row container-fluid"  id="divshow" class="bonds">
+    <div fxLayout="row wrap" fxLayoutGap="10px grid">
+      <div fxFlex.lg="50%" fxFlex.xs="50%" fxFlex.sm="50%">
+        <mat-card>
+            <div>
+                <h3 class="active">2000</h3>
+            </div>
+            <p>BONDS ACTIVE SECURITIES</p>
         </mat-card>
       </div>
       <div fxFlex.lg="50%" fxFlex.xs="50%" fxFlex.sm="50%">
         <mat-card>
             <div>
-                <h3 class="inactive">9</h3>
+                <h3 class="inactive">18</h3>
             </div>
-            <p>Inactive Securities</p>
+            <p>BONDS INACTIVE SECURITIES</p>
         </mat-card>
       </div>
     </div>
+    <br/>
+    <h1 style="text-align: center; font-weight: bold;">BONDS DETAILS</h1>
+    <div><app-table-component [showBonds]="showBonds"></app-table-component></div>
   </div>
-  <br>
-  <div><app-table-component></app-table-component></div>

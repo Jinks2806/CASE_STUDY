@@ -6,10 +6,18 @@ import {MatToolbarModule} from '@angular/material/toolbar';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { SecMasterUploaderModule } from './sec-master-uploader/sec-master-uploader.module';
 import { SecurityMasterViewerModule } from './security-master-viewer/security-master-viewer.module';
+import {MatDividerModule} from '@angular/material/divider';
+import {MatIconModule} from '@angular/material/icon';
+import {MatButtonToggleModule} from '@angular/material/button-toggle';
+import {MatButtonModule} from '@angular/material/button';
+import {MatMenuModule} from '@angular/material/menu';
+import {MatCardModule} from '@angular/material/card';
+import { FlexLayoutModule } from '@angular/flex-layout';
+import {MatSidenavModule} from '@angular/material/sidenav';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
   ],
   imports: [
     SecurityMasterViewerModule,
@@ -18,6 +26,14 @@ import { SecurityMasterViewerModule } from './security-master-viewer/security-ma
     AppRoutingModule,
     MatToolbarModule,
     BrowserAnimationsModule,
+    MatDividerModule,
+    MatIconModule,
+    MatButtonToggleModule,
+    MatButtonModule,
+    MatMenuModule,
+    MatCardModule,
+    FlexLayoutModule,
+    MatSidenavModule
   ],
   providers: [],
   bootstrap: [AppComponent]

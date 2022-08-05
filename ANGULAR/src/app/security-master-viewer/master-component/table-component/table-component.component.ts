@@ -1,6 +1,6 @@
 import { DatePipe } from '@angular/common';
-import { Component, OnInit } from '@angular/core';
-import { Interface } from 'src/app/shared/Interfaces/interface';
+import { Component,Input, OnInit } from '@angular/core';
+import { Interface } from 'src/app/Shared/Interfaces/interface';
 
 @Component({
   selector: 'app-table-component',
@@ -8,15 +8,39 @@ import { Interface } from 'src/app/shared/Interfaces/interface';
   styleUrls: ['./table-component.component.scss']
 })
 export class TableComponentComponent implements OnInit {
+  @Input() showBonds!: boolean;
+  @Input() showEquity! : boolean;
+  public showForm: boolean = false;
+  public closeEditForm(){
+    this.showForm=false
+  }
+  public toggleEditForm(){
+    this.closeEditForm()
+    this.showForm=true
+  }
 
-  public ELEMENT_DATA: Interface.tableInterface[] = [
+  public ELEMENT_DATA_EQUITY: Interface.tableInterface[] = [
+    {SECID: 1, NAME: 'ABC', DESCRIPTION: 'ABC', PRICE: 100, DATE: '08-03-2022', EDIT: "edit", DELETE: "https://www.google.com/"},
+    {SECID: 1, NAME: 'ABC', DESCRIPTION: 'ABC', PRICE: -100, DATE: '08-03-2022', EDIT: "https://www.google.com/", DELETE: "https://www.google.com/"},
     {SECID: 1, NAME: 'ABC', DESCRIPTION: 'ABC', PRICE: 100, DATE: '08-03-2022', EDIT: "https://www.google.com/", DELETE: "https://www.google.com/"},
-    {SECID: 1, NAME: 'ABC', DESCRIPTION: 'ABC', PRICE: -100, DATE: '08-03-2022', EDIT: "https://www.google.com/", DELETE: "https://www.google.com/"}
+    {SECID: 1, NAME: 'ABC', DESCRIPTION: 'ABC', PRICE: 100, DATE: '08-03-2022', EDIT: "https://www.google.com/", DELETE: "https://www.google.com/"},
+    {SECID: 1, NAME: 'ABC', DESCRIPTION: 'ABC', PRICE: 100, DATE: '08-03-2022', EDIT: "https://www.google.com/", DELETE: "https://www.google.com/"},
+    {SECID: 1, NAME: 'ABC', DESCRIPTION: 'ABC', PRICE: 100, DATE: '08-03-2022', EDIT: "https://www.google.com/", DELETE: "https://www.google.com/"}
+  ];
+
+  public ELEMENT_DATA_BONDS: Interface.tableInterface[] = [
+    {SECID: 1, NAME: 'DEF', DESCRIPTION: 'DEF', PRICE: 500, DATE: '08-03-2022', EDIT: "https://www.google.com/", DELETE: "https://www.google.com/"},
+    {SECID: 1, NAME: 'DEF', DESCRIPTION: 'DEF', PRICE: -500, DATE: '08-03-2022', EDIT: "https://www.google.com/", DELETE: "https://www.google.com/"},
+    {SECID: 1, NAME: 'DEF', DESCRIPTION: 'DEF', PRICE: -500, DATE: '08-03-2022', EDIT: "https://www.google.com/", DELETE: "https://www.google.com/"},
+    {SECID: 1, NAME: 'DEF', DESCRIPTION: 'DEF', PRICE: -500, DATE: '08-03-2022', EDIT: "https://www.google.com/", DELETE: "https://www.google.com/"},
+    {SECID: 1, NAME: 'DEF', DESCRIPTION: 'DEF', PRICE: -500, DATE: '08-03-2022', EDIT: "https://www.google.com/", DELETE: "https://www.google.com/"},
+    {SECID: 1, NAME: 'DEF', DESCRIPTION: 'DEF', PRICE: -500, DATE: '08-03-2022', EDIT: "https://www.google.com/", DELETE: "https://www.google.com/"}
   ];
   constructor() { }
 
   ngOnInit(): void {
   }
   displayedColumns: string[] = ['SECID', 'NAME', 'DESCRIPTION', 'PRICE', 'DATE', 'EDIT', 'DELETE'];
-  dataSource = this.ELEMENT_DATA;
+  dataSourceEquity = this.ELEMENT_DATA_EQUITY;
+  dataSourceBonds = this.ELEMENT_DATA_BONDS;
 }

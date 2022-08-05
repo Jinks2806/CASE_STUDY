@@ -1,11 +1,11 @@
 export namespace Interface{
     export interface tableInterface{
-        SECID: number;
-        NAME: string;
-        DESCRIPTION: String;
-        PRICE: Number;
-        DATE: string;
-        EDIT: string;
-        DELETE: string;
+        SECID: Number,
+        NAME: String,
+        DESCRIPTION: String,
+        PRICE: Number,
+        DATE: String,
+        EDIT: String,
+        DELETE: String
     }
 }
