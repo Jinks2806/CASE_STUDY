@@ -1,1 +1,157 @@
-<h1>FORM</h1>
+ <div class="form" *ngIf='showEquity'>
+    <!-- SN -->
+    <form [formGroup]="editEquityFormGroup" fxLayout="row wrap">
+      <div fxLayout="row" fxFlexFill fxLayout.lt-sm="column" fxLayoutGap="16px">
+        <mat-form-field fxFlex>
+            <mat-label>Security Name</mat-label>
+            <input matInput formControlName="securityName">
+        </mat-form-field>
+        <!-- D -->
+        <mat-form-field fxFlex>
+            <mat-label>Description</mat-label>
+            <input matInput placeholder="Description" formControlName="description">
+        </mat-form-field> 
+        <!-- PC -->
+        <mat-form-field fxFlex>
+          <mat-label>Pricing Currency</mat-label>
+          <input matInput placeholder="Pricing Currency" formControlName="pricingCurrency">
+        </mat-form-field>
+      </div>
+    </form>
+    <form [formGroup]="editEquityFormGroup" fxLayout="row wrap">
+      <div fxLayout="row" fxFlexFill fxLayout.lt-sm="column" fxLayoutGap="16px">
+        <!-- TSO -->
+        <mat-form-field fxFlex>
+          <mat-label>Total Shares Outstanding</mat-label>
+          <input matInput placeholder="Total Shares Outstanding" formControlName="totalSharesOutstanding">
+        </mat-form-field>
+        <!-- OP -->
+        <mat-form-field fxFlex>
+          <mat-label>Open Price</mat-label>
+          <input matInput placeholder="Open Price" formControlName="openPrice">
+        </mat-form-field>
+        <!-- CP -->
+        <mat-form-field fxFlex>
+          <mat-label>Close Price</mat-label>
+          <input matInput placeholder="Close Price" formControlName="closePrice">
+        </mat-form-field>
+      </div>
+    </form>
+
+    <form [formGroup]="editEquityFormGroup" fxLayout="row wrap">
+      <div fxLayout="row" fxFlexFill fxLayout.lt-sm="column" fxLayoutGap="16px">
+        <!-- DDD -->
+        <mat-form-field fxFlex>
+          <mat-label>Choose a date</mat-label>
+          <input matInput [matDatepicker]="picker" placeholder="Date" formControlName="dividendDeclaredDate">
+          <mat-hint>MM/DD/YYYY</mat-hint>
+          <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+          <mat-datepicker #picker></mat-datepicker>
+        </mat-form-field>
+        <!-- PF CR -->
+        <mat-form-field fxFlex>
+          <mat-label>PF Credit Rating</mat-label>
+          <input matInput placeholder="PF Credit Rating" formControlName="pfCreditRating">
+        </mat-form-field>
+      </div>
+    </form>
+      <!-- <button mat-button color="primary" type="submit" [disabled]="!form.valid">Primary</button> -->
+      <br/>
+      SecName: {{editEquityFormGroup.controls["securityName"].value}}
+      <br/>
+      Des: {{editEquityFormGroup.controls["description"].value}}
+      <br/>
+      price curr: {{editEquityFormGroup.controls["pricingCurrency"].value}}
+      <br/>
+      tot shares: {{editEquityFormGroup.controls["totalSharesOutstanding"].value}}
+      <br/>
+      open price: {{editEquityFormGroup.controls["openPrice"].value}}
+      <br/>
+      close price: {{editEquityFormGroup.controls["closePrice"].value}}
+      <br/>
+      DDD: {{editEquityFormGroup.controls["dividendDeclaredDate"].value}}
+      <br/>
+      pf CR: {{editEquityFormGroup.controls["pfCreditRating"].value}}
+</div>
+
+<div class="form" *ngIf='showBonds'>
+  <!-- SN -->
+  <form [formGroup]="editBondsFormGroup" fxLayout="row wrap">
+    <div fxLayout="row" fxFlexFill fxLayout.lt-sm="column" fxLayoutGap="16px">
+      <mat-form-field fxFlex>
+          <mat-label>Security Name</mat-label>
+          <input matInput formControlName="securityName">
+      </mat-form-field>
+      <!-- D -->
+      <mat-form-field fxFlex>
+          <mat-label>Description</mat-label>
+          <input matInput placeholder="Description" formControlName="description">
+      </mat-form-field> 
+      <!-- PC -->
+      <mat-form-field fxFlex>
+        <mat-label>Coupon</mat-label>
+        <input matInput placeholder="Coupon" formControlName="coupon">
+      </mat-form-field>
+    </div>
+  </form>
+  <form [formGroup]="editBondsFormGroup" fxLayout="row wrap">
+    <div fxLayout="row" fxFlexFill fxLayout.lt-sm="column" fxLayoutGap="16px">
+      <!-- TSO -->
+      <mat-form-field fxFlex>
+        <mat-label>Callable Flag</mat-label>
+        <input matInput placeholder="Callable Flag" formControlName="callableFlag">
+      </mat-form-field>
+      <!-- OP -->
+      <mat-form-field fxFlex>
+        <mat-label>Maturity</mat-label>
+        <input matInput placeholder="Maturity" formControlName="maturity">
+      </mat-form-field>
+      <!-- CP -->
+      <mat-form-field fxFlex>
+        <mat-label>Penultimate Coupon Date</mat-label>
+        <input matInput [matDatepicker]="picker" placeholder="Penultimate Coupon Date" formControlName="penultimateCouponDate">
+        <mat-hint>MM/DD/YYYY</mat-hint>
+        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
+      </mat-form-field>
+    </div>
+  </form>
+  <form [formGroup]="editBondsFormGroup" fxLayout="row wrap">
+    <div fxLayout="row" fxFlexFill fxLayout.lt-sm="column" fxLayoutGap="16px">
+      <!-- DDD -->
+      <mat-form-field fxFlex>
+        <mat-label>Ask Price</mat-label>
+        <input matInput placeholder="Ask Price" formControlName="askPrice">
+      </mat-form-field>
+      <!-- BP -->
+      <mat-form-field fxFlex>
+        <mat-label>Bid Price</mat-label>
+        <input matInput placeholder="Bid Price" formControlName="bidPrice">
+      </mat-form-field>
+        <!-- PF CR -->
+        <mat-form-field fxFlex>
+          <mat-label>PF Credit Rating</mat-label>
+          <input matInput placeholder="PF Credit Rating" formControlName="pfCreditRating">
+        </mat-form-field>
+    </div>
+  </form>
+    <!-- <button mat-button color="primary" type="submit" [disabled]="!form.valid">Primary</button> -->
+    <br/>
+    SecName: {{editBondsFormGroup.controls["securityName"].value}}
+    <br/>
+    Des: {{editBondsFormGroup.controls["description"].value}}
+    <br/>
+    coupon: {{editBondsFormGroup.controls["coupon"].value}}
+    <br/>
+    callableFlag: {{editBondsFormGroup.controls["callableFlag"].value}}
+    <br/>
+    maturity: {{editBondsFormGroup.controls["maturity"].value}}
+    <br/>
+    penultimateCouponDate: {{editBondsFormGroup.controls["penultimateCouponDate"].value}}
+    <br/>
+    askPrice: {{editBondsFormGroup.controls["askPrice"].value}}
+    <br/>
+    bidPrice: {{editBondsFormGroup.controls["bidPrice"].value}}
+    <br/>
+    pfCreditRating: {{editBondsFormGroup.controls["pfCreditRating"].value}}
+</div>
