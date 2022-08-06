@@ -24,7 +24,8 @@ export class EditFormComponentComponent implements OnInit {
   }
   private initForm(){
     this.editEquityFormGroup = new FormGroup({
-      securityName : new FormControl({value:this.EquityList.securityName}),
+      //{value:this.EquityList.securityName}
+      securityName : new FormControl(),
       description : new FormControl(),
       pricingCurrency : new FormControl(),
       totalSharesOutstanding : new FormControl(),
@@ -35,7 +36,8 @@ export class EditFormComponentComponent implements OnInit {
     })
 
     this.editBondsFormGroup = new FormGroup({
-      securityName : new FormControl({value:this.EquityList.at(0).securityName}),
+      //{value:this.EquityList.at(0).securityName}
+      securityName : new FormControl(),
       description : new FormControl(),
       coupon : new FormControl(),
       callableFlag : new FormControl(),
