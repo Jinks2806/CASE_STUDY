@@ -11,7 +11,24 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddDbContext<CaseStudy_Grp3Context>(options => options.UseSqlServer(configuration.GetConnectionString("DefaultConnection")));
 
+
+
+var domain = "_domain";
+
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy(name: domain, policy =>
+    {
+        policy.WithOrigins("*");
+    });
+});
+
+
 var app = builder.Build();
+
+app.UseCors(domain);
+
+
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
@@ -19,7 +36,7 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
- void ConfigureServices(IServiceCollection services)
+void ConfigureServices(IServiceCollection services)
 {
     services.AddControllers();
     services.AddSingleton<CaseStudy_Grp3Context>();
@@ -30,3 +47,4 @@ app.UseAuthorization();
 app.MapControllers();
 
 app.Run();
+

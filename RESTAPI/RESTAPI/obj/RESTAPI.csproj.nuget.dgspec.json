@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\arkirkire\\source\\repos\\RESTAPI\\RESTAPI\\RESTAPI.csproj": {}
+    "C:\\Users\\sspatil\\Desktop\\CASE_STUDY\\RESTAPI\\RESTAPI\\RESTAPI.csproj": {}
   },
   "projects": {
-    "C:\\Users\\arkirkire\\source\\repos\\RESTAPI\\RESTAPI\\RESTAPI.csproj": {
+    "C:\\Users\\sspatil\\Desktop\\CASE_STUDY\\RESTAPI\\RESTAPI\\RESTAPI.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\arkirkire\\source\\repos\\RESTAPI\\RESTAPI\\RESTAPI.csproj",
+        "projectUniqueName": "C:\\Users\\sspatil\\Desktop\\CASE_STUDY\\RESTAPI\\RESTAPI\\RESTAPI.csproj",
         "projectName": "RESTAPI",
-        "projectPath": "C:\\Users\\arkirkire\\source\\repos\\RESTAPI\\RESTAPI\\RESTAPI.csproj",
-        "packagesPath": "C:\\Users\\arkirkire\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\arkirkire\\source\\repos\\RESTAPI\\RESTAPI\\obj\\",
+        "projectPath": "C:\\Users\\sspatil\\Desktop\\CASE_STUDY\\RESTAPI\\RESTAPI\\RESTAPI.csproj",
+        "packagesPath": "C:\\Users\\sspatil\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\sspatil\\Desktop\\CASE_STUDY\\RESTAPI\\RESTAPI\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\arkirkire\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\sspatil\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
