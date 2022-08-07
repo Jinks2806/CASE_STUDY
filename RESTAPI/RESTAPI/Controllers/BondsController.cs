@@ -11,74 +11,70 @@ namespace RESTAPI.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class EquitiesController : ControllerBase
+    public class BondsController : ControllerBase
     {
-        private CaseStudy_Grp3Context _context;
+        private readonly CaseStudy_Grp3Context _context;
 
-        public EquitiesController(CaseStudy_Grp3Context context)
+        public BondsController(CaseStudy_Grp3Context context)
         {
             _context = context;
         }
 
-        // GET: api/Equities
+        // GET: api/Bonds
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Equity>>> GetEquities()
+        public async Task<ActionResult<IEnumerable<Bond>>> GetBonds()
         {
-            if (_context.Equities == null)
+            if (_context.Bonds == null)
             {
                 return NotFound();
             }
-            return await _context.Equities.ToListAsync();
+            return await _context.Bonds.ToListAsync();
         }
 
-        // GET: api/Equities/5
+        // GET: api/Bonds/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<Equity>> GetEquity(int id)
+        public async Task<ActionResult<Bond>> GetBond(int id)
         {
-            if (_context.Equities == null)
+            if (_context.Bonds == null)
             {
                 return NotFound();
             }
-            var equity = await _context.Equities.FindAsync(id);
+            var bond = await _context.Bonds.FindAsync(id);
 
-            if (equity == null)
+            if (bond == null)
             {
                 return NotFound();
             }
 
-            return equity;
+            return bond;
         }
 
-        // PUT: api/Equities/5
+        // PUT: api/Bonds/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutEquity(int id, Equity equity)
+        public async Task<IActionResult> PutBond(int id, Bond bond)
         {
-            //if (id != equity.SecId)
-            //{
-            //    return BadRequest();
-            //}
             Console.WriteLine("put");
             Console.WriteLine("id to be updated " + id);
             CaseStudy_Grp3Context ctx = new CaseStudy_Grp3Context();
             //ctx.ChangeTracker.Clear();
-            Equity equityDetail = ctx.Equities.Where(o => o.SecId == id).FirstOrDefault();
+            Bond bondDetail = ctx.Bonds.Where(o => o.SecId == id).FirstOrDefault();
 
-            // equityDetail.SecId = equity.SecId;
-            //equityDetail.SecurityName = equity.SecurityName;
+            // bondDetail.SecId = bond.SecId;
+            //bondDetail.SecurityName = bond.SecurityName;
 
-            equityDetail.SecurityDescription = equity.SecurityDescription;
-            equityDetail.PriceCurrency = equity.PriceCurrency;
-            equityDetail.SharesOutstanding = equity.SharesOutstanding;
-            equityDetail.OpenPrice = equity.OpenPrice;
-            equityDetail.ClosePrice = equity.ClosePrice;
-            equityDetail.DeclaredDate = equity.DeclaredDate;
-            equityDetail.PfcreditRating = equity.PfcreditRating;
-
+            bondDetail.SecurityDescription = bond.SecurityDescription;
+            bondDetail.CouponRate = bond.CouponRate;
+            bondDetail.IsCallable = bond.IsCallable;
+            bondDetail.PenUltimateCouponDate = bond.PenUltimateCouponDate;
+            bondDetail.AskPrice = bond.AskPrice;
+            bondDetail.BidPrice = bond.BidPrice;
+            bondDetail.PfcreditRating = bond.PfcreditRating;
+            bondDetail.IsActive = bond.IsActive;
             ctx.SaveChanges();
 
             // await ctx.SaveChangesAsync();
-            Console.WriteLine("after update: " + equityDetail.SecurityDescription);
+            Console.WriteLine("after update: " + bondDetail.SecurityDescription);
             Console.WriteLine("done");
 
 
@@ -104,23 +100,23 @@ namespace RESTAPI.Controllers
             return NoContent();
         }
 
-        // POST: api/Equities
+        // POST: api/Bonds
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
-        public async Task<ActionResult<Equity>> PostEquity(Equity equity)
+        public async Task<ActionResult<Bond>> PostBond(Bond bond)
         {
-            if (_context.Equities == null)
+            if (_context.Bonds == null)
             {
-                return Problem("Entity set 'CaseStudy_Grp3Context.Equities'  is null.");
+                return Problem("Entity set 'CaseStudy_Grp3Context.Bonds'  is null.");
             }
-            _context.Equities.Add(equity);
+            _context.Bonds.Add(bond);
             try
             {
                 await _context.SaveChangesAsync();
             }
             catch (DbUpdateException)
             {
-                if (EquityExists(equity.SecId))
+                if (BondExists(bond.SecId))
                 {
                     return Conflict();
                 }
@@ -130,41 +126,42 @@ namespace RESTAPI.Controllers
                 }
             }
 
-            return CreatedAtAction("GetEquity", new { id = equity.SecId }, equity);
+            return CreatedAtAction("GetBond", new { id = bond.SecId }, bond);
         }
 
-        // DELETE: api/Equities/5
+        // DELETE: api/Bonds/5
         [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteEquity(int id)
+        public async Task<IActionResult> DeleteBond(int id)
         {
-            //if (_context.Equities == null)
+            //if (_context.Bonds == null)
             //{
             //    return NotFound();
             //}
-            //var equity = await _context.Equities.FindAsync(id);
-            //if (equity == null)
+            //var bond = await _context.Bonds.FindAsync(id);
+            //if (bond == null)
             //{
             //    return NotFound();
             //}
 
-            //_context.Equities.Remove(equity);
+            //_context.Bonds.Remove(bond);
             //await _context.SaveChangesAsync();
             Console.WriteLine("delete");
             Console.WriteLine("id to be updated " + id);
             CaseStudy_Grp3Context ctx = new CaseStudy_Grp3Context();
-            Equity equityDetail = ctx.Equities.Where(o => o.SecId == id).FirstOrDefault();
-            equityDetail.IsActive = false;
+            Bond bondDetail = ctx.Bonds.Where(o => o.SecId == id).FirstOrDefault();
+            Console.WriteLine(bondDetail.IsActive.GetType());
+            bondDetail.IsActive = 0;
 
             ctx.SaveChanges();
-            Console.WriteLine("active value: " + equityDetail.IsActive);
+            Console.WriteLine("active value: " + bondDetail.IsActive);
             Console.WriteLine("deleted");
 
             return NoContent();
         }
 
-        private bool EquityExists(int id)
+        private bool BondExists(int id)
         {
-            return (_context.Equities?.Any(e => e.SecId == id)).GetValueOrDefault();
+            return (_context.Bonds?.Any(e => e.SecId == id)).GetValueOrDefault();
         }
     }
 }

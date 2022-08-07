@@ -1,6 +1,12 @@
 .container{
   background-color: white;
 }
+.title{
+  font-family: 'Cinzel', serif;
+  font-size: 1.4em; 
+  font-weight: 700
+
+}
 
 //TOOLBAR 
 .tabs{
@@ -9,13 +15,12 @@
 
 mat-toolbar{
     margin-bottom: 40px;
-    border-color: black;
+    background-color: black;
+    color: white;
     position: sticky;
     position: -webkit-sticky; /* For macOS/iOS Safari */
     top: 0; /* Sets the sticky toolbar to be on top */
     z-index: 1000;
-    background-color: white;
-    color: black;
 }
 
 //BUTTON 
@@ -52,5 +57,6 @@ mat-toolbar{
 mat-icon {
     margin-right: 10px;
 }
+
 
   

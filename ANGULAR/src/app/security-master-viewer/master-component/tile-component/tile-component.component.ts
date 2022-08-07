@@ -15,8 +15,13 @@ export class TileComponentComponent implements OnInit {
   EactiveSecurities!: number ;
   EinactiveSecurities!: number;
 
+  BondList: any  = [];
+  BactiveSecurities!: number ;
+  BinactiveSecurities!: number;
+
   ngOnInit(): void {
     this.refreshEquityList()
+    this.refreshBondList()
   }
 
   refreshEquityList(){
@@ -39,6 +44,26 @@ export class TileComponentComponent implements OnInit {
       console.log("No of active securities are: "+this.EactiveSecurities);
       console.log("No of inactive securities are: "+ this.EinactiveSecurities);
      
+    });
+  }
+
+  refreshBondList(){
+    
+    this.service.getBonds().subscribe(data=>{
+      this.BondList = data;  
+      this.BactiveSecurities=0
+      this.BinactiveSecurities=0
+     
+      data.forEach(obj => {
+        Object.entries(obj).forEach(
+          ([key, value]) => {
+          
+          if(key=='isActive' && value===1)
+          this.BactiveSecurities++;
+        });
+        
+      });
+      this.BinactiveSecurities=data.length-this.BactiveSecurities
     });
   }
     

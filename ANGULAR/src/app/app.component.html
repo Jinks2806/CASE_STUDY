@@ -10,10 +10,12 @@
   </mat-toolbar>
  <app-tile-component [showEquity]="isShownEquity" [showBonds]="isShownBonds"></app-tile-component>
 </div> -->
- 
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@900&display=swap" rel="stylesheet">
 <div class="container">
 <mat-toolbar class="position">
-  <span style="font-size: 1.2em; font-weight: 700">{{title}}</span>
+  <span class="title">{{title}}</span>
   <span class="tabs"></span>
   <div fxShow="true" fxHide.lt-md="true">
     <mat-button-toggle-group>

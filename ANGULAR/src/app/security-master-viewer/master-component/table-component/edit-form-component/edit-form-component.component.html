@@ -1,5 +1,4 @@
  <div class="form" *ngIf='showEquity'>
-  <p>{{SECID}}</p>
     <!-- SN -->
     <form [formGroup]="editEquityFormGroup" fxLayout="row wrap">
       <div fxLayout="row" fxFlexFill fxLayout.lt-sm="column" fxLayoutGap="16px">
@@ -7,17 +6,26 @@
             <mat-label>Security Name</mat-label>
             <input matInput formControlName="securityName">
         </mat-form-field>
+
         <!-- D -->
         <mat-form-field fxFlex>
             <mat-label>Description</mat-label>
             <input matInput placeholder="Description" formControlName="description">
+            <mat-error *ngIf="editEquityFormGroup.get('description')?.hasError('required')">This field is required</mat-error>
         </mat-form-field> 
+
         <!-- PC -->
         <mat-form-field fxFlex>
           <mat-label>Pricing Currency</mat-label>
-          <input matInput placeholder="Pricing Currency" formControlName="pricingCurrency">
+          <mat-select formControlName="pricingCurrency">
+            <mat-option value="USD">USD</mat-option>
+            <mat-option value="INR">INR</mat-option>
+            <mat-option value="EUR">EUR</mat-option>
+          </mat-select>
+          <mat-error *ngIf="editEquityFormGroup.get('pricingCurrency')?.hasError('required')">This field is required</mat-error>
         </mat-form-field>
       </div>
+
     </form>
     <form [formGroup]="editEquityFormGroup" fxLayout="row wrap">
       <div fxLayout="row" fxFlexFill fxLayout.lt-sm="column" fxLayoutGap="16px">
@@ -25,16 +33,24 @@
         <mat-form-field fxFlex>
           <mat-label>Total Shares Outstanding</mat-label>
           <input matInput placeholder="Total Shares Outstanding" formControlName="totalSharesOutstanding">
+          <mat-error *ngIf="editEquityFormGroup.get('totalSharesOutstanding')?.hasError('required')">This field is required</mat-error>
+          <mat-error *ngIf="editEquityFormGroup.get('totalSharesOutstanding')?.hasError('pattern')">This field cannot contain characters</mat-error>
         </mat-form-field>
+
         <!-- OP -->
         <mat-form-field fxFlex>
           <mat-label>Open Price</mat-label>
           <input matInput placeholder="Open Price" formControlName="openPrice">
+          <mat-error *ngIf="editEquityFormGroup.get('openPrice')?.hasError('required')">This field is required</mat-error>
+          <mat-error *ngIf="editEquityFormGroup.get('openPrice')?.hasError('pattern')">This field cannot contain characters</mat-error>
         </mat-form-field>
+
         <!-- CP -->
         <mat-form-field fxFlex>
           <mat-label>Close Price</mat-label>
           <input matInput placeholder="Close Price" formControlName="closePrice">
+          <mat-error *ngIf="editEquityFormGroup.get('closePrice')?.hasError('required')">This field is required</mat-error>
+          <mat-error *ngIf="editEquityFormGroup.get('closePrice')?.hasError('pattern')">This field cannot contain characters</mat-error>
         </mat-form-field>
       </div>
     </form>
@@ -45,18 +61,26 @@
         <mat-form-field fxFlex>
           <mat-label>Choose a date</mat-label>
           <input matInput [matDatepicker]="picker" placeholder="Date" formControlName="dividendDeclaredDate">
+          <mat-error *ngIf="editEquityFormGroup.get('dividendDeclaredDate')?.hasError('required')">This field is required</mat-error>
           <mat-hint>MM/DD/YYYY</mat-hint>
           <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
           <mat-datepicker #picker></mat-datepicker>
         </mat-form-field>
+
         <!-- PF CR -->
         <mat-form-field fxFlex>
           <mat-label>PF Credit Rating</mat-label>
-          <input matInput placeholder="PF Credit Rating" formControlName="pfCreditRating">
+          <!-- <input matInput placeholder="PF Credit Rating" formControlName="pfCreditRating"> -->
+          <mat-select formControlName="pfCreditRating">
+            <mat-option *ngFor="let cr of creditRating" [value]="cr">
+              {{cr}}
+            </mat-option>
+          </mat-select>
+          <mat-error *ngIf="editEquityFormGroup.get('pfCreditRating')?.hasError('required')">This field is required</mat-error>
         </mat-form-field>
       </div>
     </form>
-      <!-- <button mat-button color="primary" type="submit" [disabled]="!form.valid">Primary</button> -->
+    <button mat-raised-button [disabled]="!(editEquityFormGroup.valid && editEquityFormGroup.dirty)" (click)="updateEquities()">SUBMIT</button>
       <br/>
       SecName: {{editEquityFormGroup.controls["securityName"].value}}
       <br/>
@@ -72,8 +96,11 @@
       <br/>
       DDD: {{editEquityFormGroup.controls["dividendDeclaredDate"].value}}
       <br/>
-      pf CR: {{editEquityFormGroup.controls["pfCreditRating"].value}}
+      pf CR: {{editEquityFormGroup.controls["pfCreditRating"].value}} 
+      <!-- <button (click)="updateEquities()">SUBMIT</button> -->
 </div>
+
+
 
 <div class="form" *ngIf='showBonds'>
   <!-- SN -->
@@ -87,11 +114,13 @@
       <mat-form-field fxFlex>
           <mat-label>Description</mat-label>
           <input matInput placeholder="Description" formControlName="description">
+          <mat-error *ngIf="editBondsFormGroup.get('description')?.hasError('required')">This field is required</mat-error>
       </mat-form-field> 
       <!-- PC -->
       <mat-form-field fxFlex>
         <mat-label>Coupon</mat-label>
         <input matInput placeholder="Coupon" formControlName="coupon">
+        <mat-error *ngIf="editBondsFormGroup.get('coupon')?.hasError('required')">This field is required</mat-error>
       </mat-form-field>
     </div>
   </form>
@@ -100,17 +129,25 @@
       <!-- TSO -->
       <mat-form-field fxFlex>
         <mat-label>Callable Flag</mat-label>
-        <input matInput placeholder="Callable Flag" formControlName="callableFlag">
+        <!-- <input matInput placeholder="Callable Flag" formControlName="callableFlag"> -->
+        <mat-select formControlName="callableFlag">
+          <mat-option value=true>YES</mat-option>
+          <mat-option value=false>NO</mat-option>
+        </mat-select>
+        <mat-error *ngIf="editBondsFormGroup.get('callableFlag')?.hasError('required')">This field is required</mat-error>
       </mat-form-field>
       <!-- OP -->
       <mat-form-field fxFlex>
         <mat-label>Maturity</mat-label>
         <input matInput placeholder="Maturity" formControlName="maturity">
+        <mat-error *ngIf="editBondsFormGroup.get('maturity')?.hasError('required')">This field is required</mat-error>
+        
       </mat-form-field>
       <!-- CP -->
       <mat-form-field fxFlex>
         <mat-label>Penultimate Coupon Date</mat-label>
         <input matInput [matDatepicker]="picker" placeholder="Penultimate Coupon Date" formControlName="penultimateCouponDate">
+        <mat-error *ngIf="editBondsFormGroup.get('penultimateCouponDate')?.hasError('required')">This field is required</mat-error>
         <mat-hint>MM/DD/YYYY</mat-hint>
         <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
         <mat-datepicker #picker></mat-datepicker>
@@ -123,20 +160,30 @@
       <mat-form-field fxFlex>
         <mat-label>Ask Price</mat-label>
         <input matInput placeholder="Ask Price" formControlName="askPrice">
+        <mat-error *ngIf="editBondsFormGroup.get('askPrice')?.hasError('required')">This field is required</mat-error>
+        <mat-error *ngIf="editBondsFormGroup.get('askPrice')?.hasError('pattern')">This field cannot contain characters</mat-error>
       </mat-form-field>
       <!-- BP -->
       <mat-form-field fxFlex>
         <mat-label>Bid Price</mat-label>
         <input matInput placeholder="Bid Price" formControlName="bidPrice">
+        <mat-error *ngIf="editBondsFormGroup.get('bidPrice')?.hasError('required')">This field is required</mat-error>
+        <mat-error *ngIf="editBondsFormGroup.get('askPrice')?.hasError('pattern')">This field cannot contain characters</mat-error>
       </mat-form-field>
         <!-- PF CR -->
         <mat-form-field fxFlex>
           <mat-label>PF Credit Rating</mat-label>
-          <input matInput placeholder="PF Credit Rating" formControlName="pfCreditRating">
+          <!-- <input matInput placeholder="PF Credit Rating" formControlName="pfCreditRating"> -->
+          <mat-select formControlName="pfCreditRating">
+            <mat-option *ngFor="let cr of creditRating" [value]="cr">
+              {{cr}}
+            </mat-option>
+          </mat-select>
+          <mat-error *ngIf="editBondsFormGroup.get('pfCreditRating')?.hasError('required')">This field is required</mat-error>
         </mat-form-field>
     </div>
   </form>
-    <!-- <button mat-button color="primary" type="submit" [disabled]="!form.valid">Primary</button> -->
+  <button mat-raised-button [disabled]="!(editBondsFormGroup.valid && editBondsFormGroup.dirty)" (click)="updateBonds()">SUBMIT</button>
     <br/>
     SecName: {{editBondsFormGroup.controls["securityName"].value}}
     <br/>

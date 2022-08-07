@@ -12,50 +12,78 @@ export class TableComponentComponent implements OnInit {
   @Input() showBonds!: boolean;
   @Input() showEquity! : boolean;
   public showForm: boolean = false;
-  public SECID!: number;
-  public name?: string;
+  public selectedEquity!: string;
+  public selectedBonds!: string;
   public closeEditForm(){
     this.showForm=false
   }
-  public toggleEditForm(secID:number, name:string){
-    this.showForm=false
+  public toggleEquityEditForm(secID: number, name:string){
+    this.closeEditForm()
     this.showForm=true
-    this.SECID=secID
+    this.selectedEquity=name
+    this.service.setSEquity(secID);
+    this.service.setEquity(name);
   }
-
+  public toggleBondsEditForm(secID: number, name:string){
+    this.closeEditForm()
+    this.showForm=true
+    this.selectedBonds=name
+    this.service.setSBonds(secID);
+    this.service.setBonds(name);
+    // console.log(this.selectedBonds);
+  }
   EquityList: any  = [];
+  BondsList: any  = [];
   
-  // public EQUITY: any []= this.EquityList;
-  // [
-  //   {SECID: 1, NAME: 'ABC!', DESCRIPTION: 'ABC', PRICE: 100, DATE: '08-03-2022', EDIT: "edit", DELETE: "https://www.google.com/"},
-  //   {SECID: 1, NAME: 'ABC2', DESCRIPTION: 'ABC', PRICE: -100, DATE: '08-03-2022', EDIT: "https://www.google.com/", DELETE: "https://www.google.com/"},
-  //   {SECID: 1, NAME: 'ABC3', DESCRIPTION: 'ABC', PRICE: 100, DATE: '08-03-2022', EDIT: "https://www.google.com/", DELETE: "https://www.google.com/"},
-  //   {SECID: 1, NAME: 'ABC', DESCRIPTION: 'ABC', PRICE: 100, DATE: '08-03-2022', EDIT: "https://www.google.com/", DELETE: "https://www.google.com/"},
-  //   {SECID: 1, NAME: 'ABC', DESCRIPTION: 'ABC', PRICE: 100, DATE: '08-03-2022', EDIT: "https://www.google.com/", DELETE: "https://www.google.com/"},
-  //   {SECID: 1, NAME: 'ABC', DESCRIPTION: 'ABC', PRICE: 100, DATE: '08-03-2022', EDIT: "https://www.google.com/", DELETE: "https://www.google.com/"}
-  // ];
-
-  // public ELEMENT_DATA_BONDS: Interface.tableInterface[] = [
-  //   {SECID: 1, NAME: 'DEF1', DESCRIPTION: 'DEF', PRICE: 500, DATE: '08-03-2022', EDIT: "https://www.google.com/", DELETE: "https://www.google.com/"},
-  //   {SECID: 1, NAME: 'DEF2', DESCRIPTION: 'DEF', PRICE: -500, DATE: '08-03-2022', EDIT: "https://www.google.com/", DELETE: "https://www.google.com/"},
-  //   {SECID: 1, NAME: 'DEF3', DESCRIPTION: 'DEF', PRICE: -500, DATE: '08-03-2022', EDIT: "https://www.google.com/", DELETE: "https://www.google.com/"},
-  //   {SECID: 1, NAME: 'DEF', DESCRIPTION: 'DEF', PRICE: -500, DATE: '08-03-2022', EDIT: "https://www.google.com/", DELETE: "https://www.google.com/"},
-  //   {SECID: 1, NAME: 'DEF', DESCRIPTION: 'DEF', PRICE: -500, DATE: '08-03-2022', EDIT: "https://www.google.com/", DELETE: "https://www.google.com/"},
-  //   {SECID: 1, NAME: 'DEF', DESCRIPTION: 'DEF', PRICE: -500, DATE: '08-03-2022', EDIT: "https://www.google.com/", DELETE: "https://www.google.com/"}
-  // ];
-  constructor(private service: SharedService) { }
+  constructor(public service: SharedService) { }
 
   ngOnInit(): void {
+    this.service.selectedEquity$.subscribe((value) => {
+    this.selectedEquity = value;
+    this.service.getEquities().subscribe(data=>{
+      data.forEach(obj => {
+        Object.entries(obj).forEach(([key, value]) => {
+          if(key=='securityName' && value==this.selectedEquity){
+            this.service.setEquityList(obj);
+          }
+          });
+        });
+      });
+    });
+
+    this.service.selectedBonds$.subscribe((value) => {
+      this.selectedBonds = value;
+      this.service.getBonds().subscribe(data=>{
+        data.forEach(obj => {
+          Object.entries(obj).forEach(([key, value]) => {
+            if(key=='securityName' && value==this.selectedBonds){
+              this.service.setBondsList(obj);
+            }
+            });
+          });
+        });
+      });
     this.refreshEquityList();
+    this.refreshBondsList();
+    // this.deleteEquities();
+    // this.deleteBonds();
+    
   }
   displayedColumns: string[] = ['SECID', 'NAME', 'DESCRIPTION', 'PRICE', 'DATE', 'EDIT', 'DELETE'];
-  dataSourceEquity = this.EquityList;
-  // dataSourceBonds = this.ELEMENT_DATA_BONDS;
+  // dataSourceEquity = this.EquityList;
+  // dataSourceBonds = this.BondsList;
 
   refreshEquityList(){
     this.service.getEquities().subscribe(data=>{
       this.EquityList = data;
     });
   }
- 
+
+  refreshBondsList(){
+    this.service.getBonds().subscribe(data=>{
+      this.BondsList = data;
+      console.log(this.BondsList)
+    });
+  }
+
 }

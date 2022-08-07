@@ -1,11 +1,10 @@
 export namespace Interface{
     export interface tableInterface{
-        secId: Number,
-        securityName: String,
         securityDescription: String,
+        priceCurrency: string
+        sharesOutstanding: number
         openPrice: Number,
-        declaredDate: String,
-        EDIT: String,
-        DELETE: String
+        closePrice: Number,
+        pfcreditRating: string   
     }
 }

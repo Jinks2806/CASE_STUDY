@@ -24,9 +24,11 @@ builder.Services.AddCors(options =>
 });
 
 
+
 var app = builder.Build();
 
-app.UseCors(domain);
+//app.UseCors(domain);
+app.UseCors(builder => builder.AllowAnyHeader().AllowAnyMethod().AllowAnyOrigin());
 
 
 
