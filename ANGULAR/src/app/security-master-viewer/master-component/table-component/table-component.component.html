@@ -1,4 +1,6 @@
 <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+<!-- TABLE FOR EQUITIES -->
 <div *ngIf='showEquity' class="row container-fluid"  id="divshow" class="equity">
   <table mat-table [dataSource]="EquityList">
     <ng-container matColumnDef="SECID">
@@ -17,13 +19,14 @@
     </ng-container>
 
     <ng-container matColumnDef="PRICE">
-        <th mat-header-cell *matHeaderCellDef> PRICE </th>
+        <th mat-header-cell *matHeaderCellDef>OPEN PRICE </th>
         <td mat-cell *matCellDef="let element" [ngClass]="{'negative':element.openPrice<0, 'positive':element.openPrice>=0}"> ${{element.openPrice}} </td>
     </ng-container>
 
     <ng-container matColumnDef="DATE">
-      <th mat-header-cell *matHeaderCellDef> DATE </th>
-      <td mat-cell *matCellDef="let element"> {{element.declaredDate|slice:0:10}} </td>
+      <th mat-header-cell *matHeaderCellDef> DIVIDEND DATE </th>
+      <!-- <td mat-cell *matCellDef="let element">{{element.declaredDate|slice:0:10}} </td> -->
+      <td mat-cell *matCellDef="let element">{{dateObj(element.declaredDate)}} </td>
     </ng-container>
 
     <ng-container matColumnDef="EDIT">
@@ -52,6 +55,7 @@
   </div>
 </div> 
 
+<!-- TABLE FOR BONDS -->
 <div *ngIf='showBonds' class="row container-fluid"  id="divshow" class="bonds">
   <table mat-table [dataSource]="BondsList">
     <ng-container matColumnDef="SECID">
@@ -70,13 +74,13 @@
     </ng-container>
 
     <ng-container matColumnDef="PRICE">
-        <th mat-header-cell *matHeaderCellDef> LAST PRICE </th>
-        <td mat-cell *matCellDef="let element" [ngClass]="{'negative':element.lastPrice<0, 'positive':element.lastPrice>=0}"> ${{element.lastPrice}} </td>
+        <th mat-header-cell *matHeaderCellDef> ASK PRICE </th>
+        <td mat-cell *matCellDef="let element" [ngClass]="{'negative':element.askPrice<0, 'positive':element.askPrice>=0}"> ${{element.askPrice}} </td>
     </ng-container>
 
     <ng-container matColumnDef="DATE">
       <th mat-header-cell *matHeaderCellDef> MATURITY DATE </th>
-      <td mat-cell *matCellDef="let element"> {{element.maturityDate|slice:0:10}} </td>
+      <td mat-cell *matCellDef="let element"> {{dateObj(element.maturityDate)}}</td>
     </ng-container>
 
     <ng-container matColumnDef="EDIT">
@@ -104,10 +108,4 @@
     </mat-card>
   </div>
 </div>
-
-
- 
-  <!-- <div *ngFor="let item of EquityList">
-    <h3>{{item.securityName}}</h3>
-  </div>> -->
 

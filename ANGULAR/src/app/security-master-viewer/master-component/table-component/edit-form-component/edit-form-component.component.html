@@ -81,23 +81,6 @@
       </div>
     </form>
     <button mat-raised-button [disabled]="!(editEquityFormGroup.valid && editEquityFormGroup.dirty)" (click)="updateEquities()">SUBMIT</button>
-      <br/>
-      SecName: {{editEquityFormGroup.controls["securityName"].value}}
-      <br/>
-      Des: {{editEquityFormGroup.controls["description"].value}}
-      <br/>
-      price curr: {{editEquityFormGroup.controls["pricingCurrency"].value}}
-      <br/>
-      tot shares: {{editEquityFormGroup.controls["totalSharesOutstanding"].value}}
-      <br/>
-      open price: {{editEquityFormGroup.controls["openPrice"].value}}
-      <br/>
-      close price: {{editEquityFormGroup.controls["closePrice"].value}}
-      <br/>
-      DDD: {{editEquityFormGroup.controls["dividendDeclaredDate"].value}}
-      <br/>
-      pf CR: {{editEquityFormGroup.controls["pfCreditRating"].value}} 
-      <!-- <button (click)="updateEquities()">SUBMIT</button> -->
 </div>
 
 
@@ -121,6 +104,7 @@
         <mat-label>Coupon</mat-label>
         <input matInput placeholder="Coupon" formControlName="coupon">
         <mat-error *ngIf="editBondsFormGroup.get('coupon')?.hasError('required')">This field is required</mat-error>
+        <mat-error *ngIf="editBondsFormGroup.get('coupon')?.hasError('pattern')">This field cannot contain characters</mat-error>
       </mat-form-field>
     </div>
   </form>
@@ -131,8 +115,8 @@
         <mat-label>Callable Flag</mat-label>
         <!-- <input matInput placeholder="Callable Flag" formControlName="callableFlag"> -->
         <mat-select formControlName="callableFlag">
-          <mat-option value=true>YES</mat-option>
-          <mat-option value=false>NO</mat-option>
+          <mat-option value=1>YES</mat-option>
+          <mat-option value=0>NO</mat-option>
         </mat-select>
         <mat-error *ngIf="editBondsFormGroup.get('callableFlag')?.hasError('required')">This field is required</mat-error>
       </mat-form-field>
@@ -184,22 +168,4 @@
     </div>
   </form>
   <button mat-raised-button [disabled]="!(editBondsFormGroup.valid && editBondsFormGroup.dirty)" (click)="updateBonds()">SUBMIT</button>
-    <br/>
-    SecName: {{editBondsFormGroup.controls["securityName"].value}}
-    <br/>
-    Des: {{editBondsFormGroup.controls["description"].value}}
-    <br/>
-    coupon: {{editBondsFormGroup.controls["coupon"].value}}
-    <br/>
-    callableFlag: {{editBondsFormGroup.controls["callableFlag"].value}}
-    <br/>
-    maturity: {{editBondsFormGroup.controls["maturity"].value}}
-    <br/>
-    penultimateCouponDate: {{editBondsFormGroup.controls["penultimateCouponDate"].value}}
-    <br/>
-    askPrice: {{editBondsFormGroup.controls["askPrice"].value}}
-    <br/>
-    bidPrice: {{editBondsFormGroup.controls["bidPrice"].value}}
-    <br/>
-    pfCreditRating: {{editBondsFormGroup.controls["pfCreditRating"].value}}
 </div>

@@ -15,6 +15,7 @@ export class EditFormComponentComponent implements OnInit {
   @Input() selectedEquity!: string;
   @Input() preFillEquity: any;
   @Input() preFillBonds: any;
+  bool: boolean = false;
   EquityList: any  = [];
   BondList: any  = [];
   public creditRating : any
@@ -37,9 +38,10 @@ export class EditFormComponentComponent implements OnInit {
         totalSharesOutstanding : this.preFillEquity.sharesOutstanding,
         openPrice : this.preFillEquity.openPrice,
         closePrice : this.preFillEquity.closePrice,
-        dividendDeclaredDate : this.preFillEquity.declaredDate,
+        dividendDeclaredDate : new Date(this.preFillEquity.declaredDate),
         pfCreditRating : this.preFillEquity.pfcreditRating
       });
+      console.log(typeof( new Date(this.preFillEquity.declaredDate)))
     });
 
     this.service.selectedBList$.subscribe((value) => {
@@ -115,7 +117,8 @@ public hasEquityError = (control: string, error: string) => {
 
 public updateEquities(){
   if (this.editEquityFormGroup.valid) {
-    console.log("Form Submitted!");
+    alert("Your data has been updated")
+    window.location.reload()
   }
     this.service.selectedSEquity$.subscribe(data=>{
       this.SECID = data;
@@ -134,21 +137,27 @@ public updateEquities(){
       console.log(val);
 
       this.service.updateEquities(this.SECID,val).subscribe()
+      // window.location.reload()
   }
   public updateBonds(){
     if (this.editBondsFormGroup.valid) {
-      console.log("Form Submitted!");
+      alert("Your data has been updated")
+      window.location.reload()
     }
       this.service.selectedSBonds$.subscribe(data=>{
         console.log(data)
         this.SECID = data;
       });
+    if(this.editBondsFormGroup.controls["callableFlag"].value==1){
+        this.bool=true
+    }
+
       var val = {
         // BbguniqueName: '',
         SecurityName: '',
         securityDescription: this.editBondsFormGroup.controls["description"].value,
         couponRate: this.editBondsFormGroup.controls["coupon"].value,
-        isCallable: this.editBondsFormGroup.controls["callableFlag"].value,
+        isCallable: this.bool,
         maturityDate: this.editBondsFormGroup.controls["maturity"].value,
         penUltimateCouponDate: this.editBondsFormGroup.controls["penultimateCouponDate"].value,
         askPrice: this.editBondsFormGroup.controls["askPrice"].value,
@@ -156,8 +165,9 @@ public updateEquities(){
         pfcreditRating: this.editBondsFormGroup.controls["pfCreditRating"].value
       };
         console.log(val);
-  
+        console.log(typeof(this.editBondsFormGroup.controls["callableFlag"].value));
         this.service.updateBonds(this.SECID,val).subscribe()
+        //window.location.reload();
     }
   
 }

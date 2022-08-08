@@ -11,6 +11,7 @@ import { SharedService } from 'src/app/shared/Services/shared.service';
 export class TableComponentComponent implements OnInit {
   @Input() showBonds!: boolean;
   @Input() showEquity! : boolean;
+  pipe = new DatePipe('en-US')
   public showForm: boolean = false;
   public selectedEquity!: string;
   public selectedBonds!: string;
@@ -86,4 +87,8 @@ export class TableComponentComponent implements OnInit {
     });
   }
 
+  
+public dateObj(date: any){
+  return this.pipe.transform(new Date(date), 'dd/MM/yyyy')
+}
 }
